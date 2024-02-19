@@ -137,8 +137,10 @@ func NewImageProvider(options *ImageOptions) *ImageProvider {
 	if options.blurDepth != 0 {
 		query.Set("blur", fmt.Sprintf("%d", options.blurDepth))
 	}
-
-	imageURL += "?" + query.Encode()
+	queryString := query.Encode()
+	if queryString != "" {
+		imageURL += "?" + queryString
+	}
 
 	return &ImageProvider{imageURL}
 }
